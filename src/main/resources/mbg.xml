@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+      <!--  &lt;!&ndash; 生成一对一配置 &ndash;&gt;
+        <plugin type="cc.bandaotixi.plugins.OneToOnePlugin"></plugin>
+        &lt;!&ndash; 生成一对多配置 &ndash;&gt;
+        <plugin type="cc.bandaotixi.plugins.OneToManyPlugin"></plugin>
+
+        <plugin type="cc.bandaotixi.plugins.BatchInsertPlugin"></plugin>
+        <plugin type="cc.bandaotixi.plugins.BatchUpdatePlugin"></plugin>
+
+        &lt;!&ndash; 生成的pojo，将implements Serializable &ndash;&gt;
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+
+-->
+        <!-- 逆向生成时，没有注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 配置数据库连接信息 -->
+        <jdbcConnection
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://localhost:3306/ssmcrud?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+                userId="root"
+                password="123456">
+        </jdbcConnection>
+
+        <!-- java类型解析 -->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 指定javaBean生成的位置
+            targetPackage：生成在哪个包下
+            targetProject：生成在哪个工程下
+         -->
+        <javaModelGenerator
+                targetPackage="cn.ccsu.bean"
+                targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 指定sql映射文件生成的位置 -->
+        <sqlMapGenerator
+                targetPackage="mapper"
+                targetProject=".\src\main\resources\mybatis">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 指定dao接口生成的位置,就是mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="cn.ccsu.dao"
+                             targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- table 指定每个表的生成策略
+            tableName 表示连向数据后逆向生成哪张表
+            domainObjectName 表示表对应的Javabean的类名
+        -->
+        <table tableName="tbl_dept" domainObjectName="Department">
+        </table>
+        <table tableName="tbl_emp" domainObjectName="Emplovee"></table>
+
+
+    </context>
+</generatorConfiguration>
